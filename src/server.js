@@ -1,17 +1,41 @@
 const express = require('express');
+const hbs = require('hbs');
+const fs = require('fs');
+const app = express();
+
 const server = require('./serverPort');
 
-var app = express();
+app.set('view engine', 'hbs');
+
+app.use((req, res, next) => {
+    const now = new Date().toString();
+    const log = `${now}: ${req.method} ${req.url}`;
+    fs.appendFile('server.log', `${log} \n`, err => {
+        if(err) {
+            console.log('Unable to append in log file');
+        }
+    });
+    next();
+});
+
+hbs.registerPartials(`${__dirname}/views/partials`);
+
+// nodemon server -e js,hbs (e stands out for extentions to look out for while compiling)
+
+hbs.registerHelper('getCurrentYear', () => {
+    return new Date().getFullYear()
+});
+
+hbs.registerHelper('screamIt', (text) => {
+    return text.toUpperCase();
+});
+
 app.use(express.static(`${__dirname}/public`));
 
-app.get('/', (req, res) => {
-    // res.send('<h1>Hello Express!</h1>');
-    res.send({
-        name: 'Andrew',
-        likes: [
-            'Biking',
-            'Cities'
-        ]
+app.get('/about', (req, res) => {
+    res.render('about.hbs', {
+        pageTitle: 'Home Page',
+        welcomeMessage: 'Welcome to my website',
     });
 });
 

@@ -20,6 +20,7 @@
   "homepage": "https://github.com/mayurgupta1991/NodeApp#readme",
   "dependencies": {
     "express": "^4.16.3",
+    "hbs": "^4.0.1",
     "lodash": "^4.17.5",
     "nodemon": "^1.15.1",
     "yargs": "^11.0.0"
