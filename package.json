@@ -5,6 +5,7 @@
   "main": "App.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server",
     "lint": "eslint src",
     "lint:changed": "LIST=`git diff-index --name-only HEAD | grep '.jsx\\{0,1\\}'$`; if [ \"$LIST\" ]; then eslint $LIST; fi"
   },
