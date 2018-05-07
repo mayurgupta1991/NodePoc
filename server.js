@@ -41,6 +41,21 @@ app.get('/about', (req, res) => {
     });
 });
 
+// testing routes in node===> added new user route
+
+app.get('/users', (req, res) => {
+    res.status(200).send([{
+        name: 'Mike',
+        age: 27
+    }, {
+        name: 'Andrew',
+        age: 25
+    }, {
+        name: 'Jen',
+        age: 26
+    }]);
+});
+
 app.get('/about', (req, res) => {
     res.send('About Page');
 });
@@ -55,3 +70,7 @@ app.get('/bad', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is up on port ${server.SERVER_PORT}`);
 });
+
+module.exports = {
+    app
+};
